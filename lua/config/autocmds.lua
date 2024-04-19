@@ -4,15 +4,15 @@
 
 
 
-vim.api.nvim_create_autocmd("InsertEnter", {
-  pattern = "*",
-  command = "silent !im-select.exe 2052",
-})
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+--   pattern = "*",
+--   command = "silent !im-select 2052",
+-- })
 
 -- 离开插入模式
 vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = "*",
-  command = "silent !im-select.exe 1033",
+  command = "silent !im-select com.apple.keylayout.US",
 })
 
 
