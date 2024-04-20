@@ -13,13 +13,35 @@ require("config.lazy")
 --   vim.opt[option] = value
 -- end
 
+if vim.g.neovide then
+  -- Put anything you want to happen only in Neovide here
+  vim.g.neovide_scale_factor = 1.0
+  vim.g.neovide_transparency = 0.87
+  vim.g.neovide_theme = "dark"
+  vim.g.neovide_cursor_vfx_mode = "railgun"
+  vim.g.neovide_refresh_rate = 60
+  -- vim.g.neovide_font_size = 24
+  vim.opt.guifont = "FiraCode Nerd Font:h16"
+  vim.keymap.set("n", "<C-s>", ":w<CR>", { silent = true })
+
+  -- 在可视模式和普通模式下从系统剪贴板复制和粘贴
+  vim.keymap.set("v", "<C-c>", '"+y', { silent = true }) -- 复制
+  vim.keymap.set("n", "<C-v>", '"+p', { silent = true }) -- 普通模式粘贴
+  vim.keymap.set("v", "<C-v>", '"+p', { silent = true }) -- 可视模式粘贴
+  vim.keymap.set("v", "<C-v>", '"+p', { silent = true })
+  -- 在命令行模式下粘贴
+  vim.keymap.set("c", "<C-v>", "<C-R>+", { silent = true })
+  -- 在插入模式下粘贴
+  vim.keymap.set("i", "<C-v>", "<C-R>+", { silent = true })
+  -- 如果使用终端模式
+  vim.keymap.set("t", "<C-v>", "<C-R>+", { silent = true })
+end
+
 vim.api.nvim_create_autocmd("VimEnter", {
   pattern = "*",
   callback = function()
     if vim.g.neovide then
-      vim.defer_fn(function()
-        vim.fn.system("im-select com.apple.keylayout.US")
-      end, 0) -- 延迟1000毫秒执行
+      vim.fn.system("im-select com.apple.keylayout.US")
     end
   end,
 })
