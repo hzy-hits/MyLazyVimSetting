@@ -37,3 +37,4 @@ vim.api.nvim_create_autocmd("VimLeave", {
   end,
 })
 --end
+--test for git
